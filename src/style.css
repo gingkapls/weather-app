@@ -3,22 +3,50 @@
   --card-padding: 12px;
 }
 
+html,
 body {
+  height: 100%;
+  margin: 0;
+}
+
+.app {
   display: flex;
-  height: 100vh;
+  background: linear-gradient(skyblue, lightyellow);
+  margin: 0;
+  height: 100%;
+  gap: 20px;
   flex-direction: column;
   align-items: center;
+  font-family: sans-serif;
 }
 
 .current-weather {
-  background-color: skyblue;
+  margin-top: 20px;
+  width: min(50vw, 200px);
   text-align: center;
   padding: var(--card-padding);
   border-radius: var(--border-radius);
+  background-color: rgba(255, 255, 255, 0.3);
+  backdrop-filter: blur(10px), brightness(100%);
+  transition: all 300ms ease-in-out;
+}
+
+.current-weather:hover {
+  backdrop-filter: brightness(110%);
 }
 
 .location {
   font-size: 1.5rem;
+  font-family: serif;
+  width: 100%;
+  text-align: center;
+  background-color: transparent;
+  border: none;
+}
+
+.location:focus {
+  box-shadow: -1px -1px 0 2px black;
+  outline: none;
 }
 
 .current-temp {
@@ -44,4 +72,30 @@ body {
 .high::before {
   content: 'H:';
   margin-right: 4px;
+}
+
+.hours-container {
+  width: 80vw;
+  border-radius: var(--border-radius);
+  background-color: rgba(255, 255, 255, 0.3);
+  backdrop-filter: blur(10px), brightness(100%);
+  font-weight: 500;
+  transition: all 300ms ease-in-out;
+}
+
+.hours-container:hover {
+  backdrop-filter: brightness(110%);
+}
+
+.hour-list {
+  list-style: none;
+  padding: 0;
+  margin: 0px 0;
+  display: flex;
+  text-align: center;
+  overflow-y: scroll;
+}
+
+.hour-list > li {
+  margin: 20px 8px;
 }
