@@ -27,6 +27,7 @@ const DOMController = (() => {
   };
 
   const render = (data) => {
+    locationEl.value = data.area.name;
     generateWeatherCard(data);
     generateHourlyList(data.todayData.hours);
     generateForecast(data);
