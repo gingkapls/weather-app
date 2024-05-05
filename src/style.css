@@ -7,6 +7,7 @@ html,
 body {
   height: 100%;
   margin: 0;
+  font-weight: 500;
 }
 
 .app {
@@ -41,11 +42,12 @@ body {
 }
 
 .current-weather-container {
-  width: min(50vw, 200px);
+  width: min(65vw, 260px);
 }
 
 .location {
   font-size: 2rem;
+  font-weight: 700;
   margin: 0;
   padding: 0;
   font-family: serif;
@@ -53,15 +55,25 @@ body {
   text-align: center;
   background-color: transparent;
   border: none;
+  outline: 2px solid transparent;
+  transition: all 300ms ease-in-out;
+}
+
+.location:hover,
+.location:focus {
+  outline: 2px solid black;
 }
 
 .location:focus {
-  box-shadow: -1px -1px 0 2px black;
-  outline: none;
+  box-shadow: 1px 1px 0 4px black;
 }
 
 .current-temp {
   font-size: 4rem;
+}
+
+.status {
+  font-weight: 500;
 }
 
 .temp-range {
@@ -102,6 +114,7 @@ body {
   scroll-snap-align: start;
 }
 .hour-list > li > * {
+  font-weight: 500;
   margin: 8px 0;
 }
 
@@ -122,7 +135,9 @@ body {
 }
 
 img {
-  width: 50px;
+  width: 64px;
+  margin: 0;
+  padding: 0;
   height: auto;
   aspect-ratio: 1;
 }

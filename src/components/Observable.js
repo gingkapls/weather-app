@@ -17,6 +17,8 @@ const Observable = (initialValue = null) => {
     value =
       typeof updater === 'function' ? await updater(value) : await updater;
 
+    if (value === oldValue) return;
+
     subscribers.forEach(async (subscriber) => {
       await subscriber(value, oldValue);
     });
