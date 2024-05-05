@@ -23,9 +23,10 @@ const Weather = async ({ location }) => {
     } = dayData.day;
 
     const { hour: hours, date_epoch: timestamp } = dayData;
-    const { icon } = dayData.day.condition;
+    const { icon, text: status } = dayData.day.condition;
 
     return {
+      status,
       timestamp,
       minTemp,
       maxTemp,
@@ -40,8 +41,10 @@ const Weather = async ({ location }) => {
   const overmorrowData = getDayData(2);
   const currentData = (() => {
     const { feelslike_c: feelsLike, temp_c: temp, humidity } = data.current;
+    const { text: status } = data.current.condition;
 
     return {
+      status,
       feelsLike,
       temp,
       humidity,
