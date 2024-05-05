@@ -1,13 +1,19 @@
-window.console.log('hello world');
+import './style.css';
+import DOMController from './components/DOMController';
+import Observable from './components/Observable';
+import Weather from './components/Weather';
 
-const hello = () => {
-  // TODO:
-};
+const controller = DOMController;
+const location = Observable();
 
-// for linting testing
-class Test {
-  #mem1;
+// Listening for location changes
+controller.location.addEventListener('change', async (event) => {
+  window.console.log('changed');
+  await location.update(await Weather({ location: event.currentTarget.value }));
+});
 
-  #mem2;
+// Rendering on location change
+location.subscribe(() => controller.render(location.value));
 
-}
+// Initial location
+await location.update(await Weather({ location: 'Cupertino' }));
