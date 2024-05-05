@@ -9,7 +9,7 @@ const HourList = (hourData) => {
     const time = hour.time.split(' ')[1];
 
     timeEl.textContent = time;
-    tempEl.textContent = `${hour.temp_c}°`;
+    tempEl.textContent = `${Math.round(hour.temp_c)}°`;
     img.src = `https://${hour.condition.icon}`;
 
     item.append(timeEl);
