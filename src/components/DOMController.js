@@ -1,51 +1,42 @@
 import HourList from './HourList';
+import Weathercard from './WeatherCard';
+import ForecastItem from './ForecastItem';
 
 const DOMController = (() => {
   // Current weather card
-  const currentWeatherCard = document.querySelector('.current-weather');
-  const currentTempEl = currentWeatherCard.querySelector('.current-temp');
-  const locationEl = currentWeatherCard.querySelector('.location');
-  const statusEl = currentWeatherCard.querySelector('.status');
-  const minTempEl = currentWeatherCard.querySelector('.min-temp');
-  const maxTempEl = currentWeatherCard.querySelector('.max-temp');
-
-  // const adviceContainer = document.querySelector('.advice');
+  const currentWeatherCard = document.querySelector('.current-weather-card');
+  const locationEl = document.querySelector('.location');
   const hourList = document.querySelector('.hour-list');
+  const forecastList = document.querySelector('.forecast-list');
 
   const generateHourlyList = (hourData) => {
     const list = HourList(hourData);
     hourList.replaceChildren(list);
   };
 
-  const updateElement = (element) => (val) => {
-    // eslint-disable-next-line no-param-reassign
-    element.textContent = val;
+  const generateWeatherCard = (data) => {
+    currentWeatherCard.replaceChildren(Weathercard(data));
   };
 
-  const getLocation = () => locationEl.value;
-  const setLocation = (val) => {
-    locationEl.value = val;
-  };
-  const setStatus = updateElement(statusEl);
-  const setCurrentTemp = updateElement(currentTempEl);
-  const setMinTemp = updateElement(minTempEl);
-  const setMaxTemp = updateElement(maxTempEl);
+  const generateForecast = (data) => {
+    const today = ForecastItem(data.todayData);
+    const tomorrow = ForecastItem(data.tomorrowData);
+    const overmorrow = ForecastItem(data.overmorrowData);
 
-  const setCurrentDay = ({ location, status, temp, minTemp, maxTemp }) => {
-    setLocation(location);
-    setStatus(status);
-    setMinTemp(`L:${minTemp}°`);
-    setMaxTemp(`H:${maxTemp}°`);
-    setCurrentTemp(`${temp}°`);
+    forecastList.replaceChildren(today, tomorrow, overmorrow);
   };
 
-  const setDayForecast = (day) => (element) => {};
+  const render = (data) => {
+    generateWeatherCard(data);
+    generateHourlyList(data.todayData.hours);
+    generateForecast(data);
+  };
 
   return {
-    getLocation,
-    generateHourlyList,
-    setLocation,
-    setCurrentDay,
+    get location() {
+      return locationEl;
+    },
+    render,
   };
 })();
 
